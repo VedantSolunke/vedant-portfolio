@@ -1,0 +1,9 @@
+@import "tailwindcss";
+:root { --background: #f7f7f5; --foreground: #292827; --muted: #6f6c66; --line: #d9d7d1; --card: #fbfbf9; --accent: #e8794f; }
+:root[data-theme="dark"] { --background: #1c1c1a; --foreground: #f2f0eb; --muted: #aaa69e; --line: #45433f; --card: #242421; --accent: #f08b62; }
+@theme inline { --color-background: var(--background); --color-foreground: var(--foreground); --color-muted: var(--muted); --color-line: var(--line); --color-card: var(--card); --color-accent: var(--accent); }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--background); color: var(--foreground); font-family: Arial, Helvetica, sans-serif; transition: background-color 180ms ease, color 180ms ease; }
+::selection { background: #f5b8a2; color: #292827; }
+.stripes { background-image: repeating-linear-gradient(135deg, transparent 0, transparent 7px, color-mix(in srgb, var(--foreground) 5%, transparent) 7px, color-mix(in srgb, var(--foreground) 5%, transparent) 8px); }
