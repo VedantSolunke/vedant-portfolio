@@ -11,7 +11,6 @@ function subscribe(listener: () => void) {
 }
 
 function getSnapshot() {
-  if (typeof window === "undefined") return false
   const storedTheme = window.localStorage.getItem("theme")
   return storedTheme === "dark" || (!storedTheme && window.matchMedia("(prefers-color-scheme: dark)").matches)
 }
@@ -36,7 +35,7 @@ export function ThemeToggle() {
     <button
       type="button"
       onClick={toggleTheme}
-      className="flex size-9 items-center justify-center border border-line text-muted transition-colors hover:bg-foreground hover:text-background"
+      className="icon-button"
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
       title={isDark ? "Switch to light mode" : "Switch to dark mode"}
     >
