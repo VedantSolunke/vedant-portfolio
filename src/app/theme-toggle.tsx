@@ -1,45 +1,41 @@
 "use client"
 
 import { Moon, Sun } from "lucide-react"
-import { useEffect, useSyncExternalStore } from "react"
+import { useEffect, useState } from "react"
 
-const themeListeners = new Set<() => void>()
+const defaultLabel = "Toggle color theme"
 
-function subscribe(listener: () => void) {
-  themeListeners.add(listener)
-  return () => themeListeners.delete(listener)
+function themeLabel() {
+  const isDark = document.documentElement.dataset.theme === "dark"
+  return isDark ? "Switch to light mode" : "Switch to dark mode"
 }
-
-function getSnapshot() {
-  const storedTheme = window.localStorage.getItem("theme")
-  return storedTheme === "dark" || (!storedTheme && window.matchMedia("(prefers-color-scheme: dark)").matches)
-}
-
-function getServerSnapshot() { return false }
 
 export function ThemeToggle() {
-  const isDark = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
+  const [label, setLabel] = useState(defaultLabel)
 
   useEffect(() => {
-    document.documentElement.dataset.theme = isDark ? "dark" : "light"
-  }, [isDark])
+    const sync = () => setLabel(themeLabel())
+    sync()
 
-  function toggleTheme() {
-    const nextIsDark = !isDark
-    document.documentElement.dataset.theme = nextIsDark ? "dark" : "light"
-    window.localStorage.setItem("theme", nextIsDark ? "dark" : "light")
-    themeListeners.forEach((listener) => listener())
-  }
+    const observer = new MutationObserver(sync)
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"],
+    })
+
+    return () => observer.disconnect()
+  }, [])
 
   return (
     <button
       type="button"
-      onClick={toggleTheme}
       className="icon-button"
-      aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
-      title={isDark ? "Switch to light mode" : "Switch to dark mode"}
+      data-theme-toggle=""
+      aria-label={label}
+      title={label}
     >
-      {isDark ? <Sun className="size-4" /> : <Moon className="size-4" />}
+      <Sun className="theme-icon theme-icon-sun size-4" aria-hidden="true" />
+      <Moon className="theme-icon theme-icon-moon size-4" aria-hidden="true" />
     </button>
   )
 }

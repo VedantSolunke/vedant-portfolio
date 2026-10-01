@@ -1,21 +1,27 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f7f7f5;
-  --foreground: #292827;
-  --muted: #6f6c66;
-  --line: #d9d7d1;
-  --card: #fbfbf9;
-  --accent: #e8794f;
+  --background: #f3f5f7;
+  --foreground: #1c2128;
+  --muted: #4e5966;
+  --line: #e1e5ea;
+  --card: #ffffff;
+  --accent: #ca9a04;
+  --accent-foreground: #1a1508;
+  --accent-soft: #fef3c7;
+  --ring: #ca9a04;
 }
 
 :root[data-theme="dark"] {
-  --background: #1c1c1a;
-  --foreground: #f2f0eb;
-  --muted: #aaa69e;
-  --line: #45433f;
-  --card: #242421;
-  --accent: #f08b62;
+  --background: #0c0e11;
+  --foreground: #e7ebef;
+  --muted: #b4bcc6;
+  --line: #2a3038;
+  --card: #15181d;
+  --accent: #facc15;
+  --accent-foreground: #14110a;
+  --accent-soft: #2a2412;
+  --ring: #facc15;
 }
 
 @theme inline {
@@ -25,8 +31,11 @@
   --color-line: var(--line);
   --color-card: var(--card);
   --color-accent: var(--accent);
-  --font-sans: var(--font-sans-family);
-  --font-mono: var(--font-mono-family);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent-soft: var(--accent-soft);
+  --color-ring: var(--ring);
+  --font-sans: var(--font-sans-family), system-ui, sans-serif;
+  --font-mono: var(--font-mono-family), ui-monospace, monospace;
 }
 
 * {
@@ -35,46 +44,75 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 6.5rem;
+  scroll-padding-top: 5.5rem;
+}
+
+body {
+  margin: 0;
+  overflow-x: clip;
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans-family), system-ui, sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 200ms ease, color 200ms ease;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--accent) 35%, var(--accent-soft));
+  color: var(--foreground);
+}
+
+@keyframes settle {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
-}
 
-body {
-  margin: 0;
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans-family), system-ui, sans-serif;
-  font-size: 1rem;
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  transition: background-color 180ms ease, color 180ms ease;
-}
+  body,
+  .hit,
+  .icon-button,
+  .panel,
+  .project-card,
+  .settle {
+    transition: none;
+    animation: none;
+  }
 
-::selection {
-  background: #f5b8a2;
-  color: #292827;
+  .icon-button:active {
+    transform: none;
+  }
 }
 
 @layer components {
+  .skip-link {
+    @apply absolute top-3 left-4 z-20 -translate-y-16 rounded-md bg-accent px-3 py-2 text-sm font-medium text-accent-foreground outline-none focus-visible:translate-y-0 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+  }
+
   .type-name {
-    @apply font-sans text-2xl font-semibold tracking-tight text-foreground sm:text-[1.75rem];
+    font-family: var(--font-mono), ui-monospace, monospace;
+    @apply text-xl leading-tight font-medium tracking-tight text-foreground;
   }
 
   .type-section {
-    @apply font-sans text-lg font-semibold tracking-tight text-foreground;
+    font-family: var(--font-mono), ui-monospace, monospace;
+    @apply text-sm leading-normal font-medium text-muted;
   }
 
   .type-title {
-    @apply font-sans text-base font-medium leading-snug text-foreground;
-  }
-
-  .type-headline {
-    @apply font-sans text-base font-medium leading-relaxed text-foreground;
+    @apply font-sans text-sm leading-snug font-medium text-foreground;
   }
 
   .type-copy {
@@ -85,19 +123,44 @@ body {
     @apply font-sans text-sm leading-relaxed text-muted;
   }
 
-  .icon-well {
-    @apply flex size-9 shrink-0 items-center justify-center rounded-lg border border-line bg-foreground/5 text-muted;
-  }
-
-  .hit {
-    @apply cursor-pointer rounded-lg outline-none transition-colors duration-200 hover:bg-foreground/5 focus-visible:ring-2 focus-visible:ring-foreground/30 focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+  .type-meta {
+    font-family: var(--font-mono), ui-monospace, monospace;
+    @apply text-[0.8125rem] leading-normal text-muted;
   }
 
   .type-nav {
     @apply font-sans text-sm leading-normal text-muted;
   }
 
+  .settle {
+    animation: settle 420ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .panel {
+    @apply rounded-lg border border-line bg-card transition-colors duration-200;
+  }
+
+  .hit {
+    @apply cursor-pointer rounded-lg outline-none transition-colors duration-200 hover:bg-foreground/5 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+  }
+
   .icon-button {
-    @apply flex size-9 shrink-0 cursor-pointer items-center justify-center rounded-lg border border-line bg-foreground/5 text-muted outline-none transition-colors duration-200 hover:bg-foreground/10 hover:text-foreground focus-visible:ring-2 focus-visible:ring-foreground/30 focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+    @apply flex size-11 shrink-0 cursor-pointer items-center justify-center rounded-lg border border-line bg-card outline-none transition-colors duration-200 hover:bg-accent-soft/50 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background active:scale-[0.98];
+  }
+
+  .theme-icon-sun {
+    display: none;
+  }
+
+  :root[data-theme="dark"] .theme-icon-sun {
+    display: block;
+  }
+
+  :root[data-theme="dark"] .theme-icon-moon {
+    display: none;
+  }
+
+  .project-card {
+    @apply overflow-hidden rounded-lg border border-line bg-card transition-colors duration-200 hover:border-foreground/25;
   }
 }

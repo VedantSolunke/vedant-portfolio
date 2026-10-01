@@ -2,13 +2,13 @@ export const portfolio = {
   profile: {
     name: "Vedant Solunke",
     age: 22,
-    identity: "Software Engineer",
+    identity: "AI and Full Stack Engineer",
     verified: true,
     views: 846,
     pronouns: "he/him",
     role: "Software Engineer · AI Engineer",
-    tagline: "I build backend systems, cloud-backed APIs, and AI-assisted engineering workflows.",
-    headline: "Backend and AI engineer. I like building, breaking, and shipping reliable systems.",
+    tagline: "I build AI-powered applications.",
+    headline: "AI engineer and Full Stack Developer. I like building, breaking, and shipping reliable systems.",
     location: "Pune, Maharashtra, India",
     phone: "+91 ***** *****",
     website: {
@@ -24,11 +24,11 @@ export const portfolio = {
     },
     about:
       "Software Engineer with a strong backend and cloud engineering foundation and hands-on experience building AI-powered applications and AI-assisted engineering workflows. Experienced in C#, .NET, ASP.NET Core, REST APIs, microservices, SQL Server, and Azure, with GenAI development using Python, LangChain, LangGraph, FastAPI, and LLM APIs. Skilled in AI workflow orchestration, prompt engineering, structured outputs, API integration, state management, and LLM observability.",
-    bioBullets: [
-      "Backend and cloud foundation across **C#**, **.NET**, **ASP.NET Core**, **REST APIs**, **microservices**, **SQL Server**, and **Azure**.",
-      "GenAI work with **Python**, **LangChain**, **LangGraph**, **FastAPI**, and **LLM APIs** for agentic workflows and structured outputs.",
-      "Shipped **GitHub Copilot Skills and Agents** adopted by a 13-member team, plus **Azure DevOps** automation that cut PR prep time by about **70%**.",
-    ],
+      bioBullets: [
+        "Software engineer by trade, AI engineer by obsession. I build with Python, C#, .NET, APIs, microservices, SQL, and Azure.",
+        "Currently deep into LLMs, RAG, LangChain, LangGraph, FastAPI, and agentic workflows. Trying to make AI do more than just autocomplete my thoughts.",
+        "I love trying new models, tools, and AI ideas. I break things, figure out why they broke, and usually end up building something cool along the way."
+      ]
   },
   experience: [
     {
@@ -58,27 +58,78 @@ export const portfolio = {
       detail: "92.30%",
     },
   ],
-  skills: {
-    "Languages & backend": ["C#", "Python", "Java", "JavaScript", "SQL", ".NET", "ASP.NET Core", "REST APIs", "Microservices", "Entity Framework Core", "FastAPI"],
-    "AI / GenAI": ["LLM APIs", "Prompt engineering", "LangChain", "LangGraph", "Agentic AI workflows", "Structured output", "LLM observability"],
-    "Cloud, data & tools": ["Azure", "Azure DevOps", "SQL Server", "MySQL", "MongoDB", "Elasticsearch", "Git", "GitHub Copilot", "Angular", "React"],
+  skills: { 
+    "Programming Languages": [
+      "Python",
+      "C#",
+      "Java",
+      "JavaScript",
+      "SQL"
+    ],
+  
+    "Backend & APIs": [
+      "FastAPI",
+      ".NET",
+      "ASP.NET Core",
+      "REST APIs",
+      "Microservices",
+      "Entity Framework Core", "supabase"
+    ],
+  
+    "AI Frameworks & Libraries": [
+      "LangChain",
+      "LangGraph",
+      "Pydantic"
+    ],
+
+    "Databases & Search": [
+      "PostgreSQL",
+      "pgvector",
+      "SQL Server",
+      "MySQL",
+      "MongoDB",
+      "Elasticsearch"
+    ],
+    "Frontend": [
+      "React",
+      "Next.js",
+      "Tailwind CSS",
+      "Shadcn UI",
+      "TypeScript",
+      "JavaScript",
+      "HTML",
+      "CSS"
+    ],
+    "Cloud & DevOps": [
+      "Microsoft Azure",
+      "AWS",
+      "Azure DevOps",
+    ],
+  
+    "Developer Tools": [
+      "Git",
+      "GitHub Copilot",
+      "Cursor",
+      "Claude Code"
+    ]
   },
+
   projects: [
     {
-      title: "AI News Summarizer",
+      title: "LegalVault",
       description:
-        "LangGraph agent that retrieves AI and technology news, summarizes it with an LLM, and writes date-wise Markdown reports with source links. Streamlit UI for model and API config, timeframe selection, and a Fetch → Summarize → Save workflow.",
-      tags: ["Python", "LangGraph", "LangChain", "Streamlit", "Agentic AI"],
+        "Agentic RAG legal research assistant for BNS criminal law. Uses LangGraph to retrieve relevant sections, analyze fact patterns, map IPC to BNS, and generate citation grounded responses with structured outputs.",
+      tags: ["Python", "LangGraph", "LangChain", "RAG", "FastAPI", "pgvector"],
       website: "",
-      github: "",
+      github: "https://github.com/VedantSolunke/LegalVaultAgenticRag",
     },
     {
       title: "AI Blog Generation Agent",
       description:
-        "LLM blog generator orchestrated with LangGraph and LangChain: title and content nodes share Pydantic state, expose a FastAPI API, route Hindi and French generation, and use LangSmith plus LangGraph Studio for tracing and human-interrupt debugging.",
+        "LLM blog generator orchestrated with LangGraph and LangChain: title and content nodes share Pydantic state, expose a FastAPI API, route Hindi and French generation, and use LangSmith plus LangGraph Studio for tracing and human interrupt debugging.",
       tags: ["Python", "LangGraph", "FastAPI", "Pydantic", "LangSmith"],
       website: "",
-      github: "",
+      github: "https://github.com/VedantSolunke/BlogAgenticApp",
     },
   ],
   socials: [
